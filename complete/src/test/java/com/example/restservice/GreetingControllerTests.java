@@ -34,12 +34,28 @@ public class GreetingControllerTests {
 	@Autowired
 	private MockMvc mockMvc;
 
+/*
+noParamGreetingShouldReturnDefaultMessage()
+
+Realiza um GET utilizando o mockMvc no endpoint "/greeting" e espera duas condicionais:
+Retorno da chamada OK, ou seja, código 200
+Conteúdo do retorno JSON da chamada contendo "Hello, World!", no caso, a mensagem padrão
+*/
+
 	@Test
 	public void noParamGreetingShouldReturnDefaultMessage() throws Exception {
 
 		this.mockMvc.perform(get("/greeting")).andDo(print()).andExpect(status().isOk())
 				.andExpect(jsonPath("$.content").value("Hello, World!"));
 	}
+
+/*
+paramGreetingShouldReturnTailoredMessage()
+
+Realiza um GET utilizando o mockMvc no endpoint "/greeting" passando o parâmetro "name" contendo "Spring Community" e espera duas condicionais:
+Retorno da chamada OK, ou seja, código 200
+Conteúdo do retorno JSON da chamada contendo retorno personalizado com o valor do parâmetro fornecido em "name", neste caso "Hello, Spring Community!"
+*/
 
 	@Test
 	public void paramGreetingShouldReturnTailoredMessage() throws Exception {
